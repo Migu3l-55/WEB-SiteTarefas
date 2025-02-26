@@ -8,4 +8,15 @@ function tarefa(tTitulo, tData, tPrioridade) {
     this.tPrioridade = tPrioridade; 
 }
 
-alert(typeof(document.querySelector("#dataVencimento").value ));
+botao.addEventListener("click", function(){ 
+    let titulo = document.querySelector("#tarefa").value;
+    let data = document.querySelector("#dataVencimento").value;
+    let prioridade = document.querySelector("#prioridade").value;
+
+    arrayDeTarefas.push(new tarefa(titulo, data, prioridade));
+    alert(arrayDeTarefas.length); 
+    alert(arrayDeTarefas[0].tTitulo);
+    alert(arrayDeTarefas[0].tData);
+    alert(arrayDeTarefas[0].tPrioridade);
+});
+
