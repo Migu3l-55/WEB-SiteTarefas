@@ -7,6 +7,25 @@ function tarefa(tTitulo, tData, tPrioridade) {
     this.tPrioridade = tPrioridade; 
 }
 
+
+function setLocalStorageArrayEqualsToArrayDeTarefas() {
+    localStorage.setItem("arrayLocalTarefas", JSON.stringify(arrayDeTarefas));
+}
+
+function setArrayDeTarefasEqualsToLocalStorageArray() {
+    arrayLocal = getLocalStorageArrayAsAnArray();
+
+    arrayDeTarefas.splice(0, arrayDeTarefas.length);
+    for (let x = 0; x < arrayLocal.length; x++) {
+        arrayDeTarefas.push(arrayLocal[x]);
+    }
+}
+
+function getLocalStorageArrayAsAnArray() {
+    return JSON.parse(localStorage.getItem("arrayLocalTarefas"));
+}
+
+
 botao.addEventListener("click", function(){ 
     let titulo = document.querySelector("#tarefa");
     let data = document.querySelector("#dataVencimento");
@@ -14,9 +33,10 @@ botao.addEventListener("click", function(){
 
     if (titulo.length == 0 || data.length == 0) {
         alert("Informe os dados");
+        
     } else {
         arrayDeTarefas.push(new tarefa(titulo.value, data.value, prioridade.value));
-
+        setLocalStorageArrayEqualsToArrayDeTarefas();
         titulo.value = "";
         data.value = "";
     }
@@ -24,6 +44,7 @@ botao.addEventListener("click", function(){
 });
 
 function exibirListaTarefas() {
+    setArrayDeTarefasEqualsToLocalStorageArray();
     //alert(arrayDeTarefas.length);
     let elemento = document.querySelector("#tbody-tarefas");
     let text = ""
