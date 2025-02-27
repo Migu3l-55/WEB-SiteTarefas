@@ -8,16 +8,23 @@ function tarefa(tTitulo, tData, tPrioridade) {
 }
 
 botao.addEventListener("click", function(){ 
-    let titulo = document.querySelector("#tarefa").value;
-    let data = document.querySelector("#dataVencimento").value;
-    let prioridade = document.querySelector("#prioridade").value;
+    let titulo = document.querySelector("#tarefa");
+    let data = document.querySelector("#dataVencimento");
+    let prioridade = document.querySelector("#prioridade");
 
-    arrayDeTarefas.push(new tarefa(titulo, data, prioridade));
+    if (titulo.length == 0 || data.length == 0) {
+        alert("Informe os dados");
+    } else {
+        arrayDeTarefas.push(new tarefa(titulo.value, data.value, prioridade.value));
+
+        titulo.value = "";
+        data.value = "";
+    }
     exibirListaTarefas()
 });
 
 function exibirListaTarefas() {
-    alert(arrayDeTarefas.length);
+    //alert(arrayDeTarefas.length);
     let elemento = document.querySelector("#tbody-tarefas");
     let text = ""
     text = `<tr>
@@ -34,5 +41,5 @@ function exibirListaTarefas() {
         </tr>`;
     }
     elemento.innerHTML = text;
-    alert(arrayDeTarefas.length);
+    //alert(arrayDeTarefas.length);
 }
