@@ -66,7 +66,7 @@ function exibirListaTarefas() {
             <td>${arrayDeTarefas[x].tTitulo}</td>
             <td>${arrayDeTarefas[x].tData}</td>
             <td>${arrayDeTarefas[x].tPrioridade}</td>
-            <td><input id="${x}" type="button" value="concluir"></td>
+            <td><input id="${x}" type="button" value="concluir" onclick="concluirTarefa(${x})"></td>
             <td><input id="${x}" type="button" value="Excluir" onclick="excluirTarefa(${x})")></td>
         </tr>`;
         } else {
@@ -83,16 +83,22 @@ function exibirListaTarefas() {
     elemento2.innerHTML = text2; //alert(arrayDeTarefas.length);
 }
 
+function concluirTarefa(index) {
+    arrayDeTarefas[index].tCompleta = true;
+    setLocalStorageArrayEqualsToArrayDeTarefas();
+    exibirListaTarefas();
+}
+
 function excluirTarefa(index) {
     arrayDeTarefas.splice(index, 1);
-    alert(arrayDeTarefas.length);
+    //alert(arrayDeTarefas.length);
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
 }
 
 function limpartTudo() {
     arrayDeTarefas.splice(0, arrayDeTarefas.length);
-    alert(arrayDeTarefas.length);
+    //alert(arrayDeTarefas.length);
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
 }
