@@ -6,6 +6,8 @@ function tarefa(tTitulo, tData, tPrioridade) {
     this.tData = tData;
     this.tPrioridade = tPrioridade; 
     this.tCompleta = false;
+    this.tDataConclusao = "";
+    this.tNoPrazo = true;
 }
 
 function setLocalStorageArrayEqualsToArrayDeTarefas() {
@@ -63,7 +65,7 @@ function exibirListaTarefas() {
         if (arrayDeTarefas[x].tCompleta == false) {
             text += `
         <tr>
-            <td>${arrayDeTarefas[x].tTitulo}</td>
+            <td id="tarefa${x}" onclick="concluirTarefa(${x})">${arrayDeTarefas[x].tTitulo}</td>
             <td>${arrayDeTarefas[x].tData}</td>
             <td>${arrayDeTarefas[x].tPrioridade}</td>
             <td><input id="${x}" type="button" value="concluir" onclick="concluirTarefa(${x})"></td>
@@ -71,8 +73,8 @@ function exibirListaTarefas() {
         </tr>`;
         } else {
             text2 += `
-        <tr>
-            <td>${arrayDeTarefas[x].tTitulo}</td>
+        <tr class="concluida" title="DATA DE CONCLUSÃO: ${arrayDeTarefas[x].tDataConclusao}">
+            <td id="tarefa${x}">${arrayDeTarefas[x].tTitulo}</td>
             <td>${arrayDeTarefas[x].tData}</td>
             <td>${arrayDeTarefas[x].tPrioridade}</td>
             <td><input id="${x}" type="button" value="Excluir" onclick="excluirTarefa(${x})"></td>
@@ -85,6 +87,13 @@ function exibirListaTarefas() {
 
 function concluirTarefa(index) {
     arrayDeTarefas[index].tCompleta = true;
+    arrayDeTarefas[index].tDataConclusao = "xx-xx-xxxx";
+
+    if (arrayDeTarefas[index].tNoPrazo == true) {
+        arrayDeTarefas[index].tDataConclusao += "\n(concluida no prazo)";
+    } else {
+        arrayDeTarefas[index].tDataConclusao += "\n(concluida fora do prazo)";
+    }
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
 }
