@@ -25,13 +25,21 @@
     </form>
 
     <section id="listagem">
-        <table id="tabelaTarefas">
-            <tbody id="tbody-tarefas">
+        <table id="tabelaTarefas-Incompletas">
+            <caption>Tarefas a fazer</caption>
+            <tbody id="tbody-tarefas-incompletas">
+                
+            </tbody>
+        </table>
+
+        <table id="tabelaTarefas-Completas">
+            <caption>Tarefas concluidas</caption>
+            <tbody id="tbody-tarefas-completas">
                 
             </tbody>
         </table>
     </section>
-
+    <input type="button" value="LIMPAR TODAS AS TAREFAS" onclick="limpartTudo()">
     <script src="script.js"></script>
 </body>
 </html>

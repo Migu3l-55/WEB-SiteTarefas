@@ -5,8 +5,8 @@ function tarefa(tTitulo, tData, tPrioridade) {
     this.tTitulo = tTitulo;
     this.tData = tData;
     this.tPrioridade = tPrioridade; 
+    this.tCompleta = false;
 }
-
 
 function setLocalStorageArrayEqualsToArrayDeTarefas() {
     localStorage.setItem("arrayLocalTarefas", JSON.stringify(arrayDeTarefas));
@@ -24,7 +24,6 @@ function setArrayDeTarefasEqualsToLocalStorageArray() {
 function getLocalStorageArrayAsAnArray() {
     return JSON.parse(localStorage.getItem("arrayLocalTarefas"));
 }
-
 
 botao.addEventListener("click", function(){ 
     let titulo = document.querySelector("#tarefa");
@@ -44,23 +43,56 @@ botao.addEventListener("click", function(){
 });
 
 function exibirListaTarefas() {
-    setArrayDeTarefasEqualsToLocalStorageArray();
-    //alert(arrayDeTarefas.length);
-    let elemento = document.querySelector("#tbody-tarefas");
-    let text = ""
-    text = `<tr>
+    setArrayDeTarefasEqualsToLocalStorageArray(); //alert(arrayDeTarefas.length);
+    let elemento = document.querySelector("#tbody-tarefas-incompletas");
+    let elemento2 = document.querySelector("#tbody-tarefas-completas");
+    let text, text2 = ""
+    text= `<tr>
                 <th>tarefa</th>
                 <th>data</th>
                 <th>prioridade</th>
+                <th>Ações</th>
+            </tr>`;
+    text2 = `<tr>
+                <th>tarefa</th>
+                <th>data</th>
+                <th>prioridade</th>
+                <th>Ações</th>
             </tr>`;
     for (let x = 0; x < arrayDeTarefas.length; x++) {
-        text += `
+        if (arrayDeTarefas[x].tCompleta == false) {
+            text += `
         <tr>
             <td>${arrayDeTarefas[x].tTitulo}</td>
             <td>${arrayDeTarefas[x].tData}</td>
             <td>${arrayDeTarefas[x].tPrioridade}</td>
+            <td><input id="${x}" type="button" value="concluir"></td>
+            <td><input id="${x}" type="button" value="Excluir" onclick="excluirTarefa(${x})")></td>
         </tr>`;
+        } else {
+            text2 += `
+        <tr>
+            <td>${arrayDeTarefas[x].tTitulo}</td>
+            <td>${arrayDeTarefas[x].tData}</td>
+            <td>${arrayDeTarefas[x].tPrioridade}</td>
+            <td><input id="${x}" type="button" value="Excluir" onclick="excluirTarefa(${x})"></td>
+        </tr>`;
+        }
     }
-    elemento.innerHTML = text;
-    //alert(arrayDeTarefas.length);
+    elemento.innerHTML = text; //alert(arrayDeTarefas.length);
+    elemento2.innerHTML = text2; //alert(arrayDeTarefas.length);
+}
+
+function excluirTarefa(index) {
+    arrayDeTarefas.splice(index, 1);
+    alert(arrayDeTarefas.length);
+    setLocalStorageArrayEqualsToArrayDeTarefas();
+    exibirListaTarefas();
+}
+
+function limpartTudo() {
+    arrayDeTarefas.splice(0, arrayDeTarefas.length);
+    alert(arrayDeTarefas.length);
+    setLocalStorageArrayEqualsToArrayDeTarefas();
+    exibirListaTarefas();
 }
