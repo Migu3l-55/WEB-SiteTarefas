@@ -1,15 +1,12 @@
 let arrayDeTarefas = [];
 let botao = document.querySelector("#adicionar-tarefa");
 
-// cria um objeto tarefa
 function tarefa(tTitulo, tData, tPrioridade) {
     this.tTitulo = tTitulo;
     this.tData = tData;
     this.tPrioridade = tPrioridade; 
 }
 
-
-// quando coloca o titulo e a data, o array reinicia...
 botao.addEventListener("click", function(){ 
     let titulo = document.querySelector("#tarefa").value;
     let data = document.querySelector("#dataVencimento").value;
@@ -19,7 +16,6 @@ botao.addEventListener("click", function(){
     exibirListaTarefas()
 });
 
-// tá funcionando, mas quando coloca o titulo e a data, o array reinicia...
 function exibirListaTarefas() {
     alert(arrayDeTarefas.length);
     let elemento = document.querySelector("#tbody-tarefas");
