@@ -37,9 +37,7 @@ botao.addEventListener("click", function(){
         
     } else {
         arrayDeTarefas.push(new tarefa(titulo.value, data.value, prioridade.value));
-        if(prioridade.value != "baixa"){
-            ordenarPrioridade();
-        }
+        ordenarPrioridade();
         setLocalStorageArrayEqualsToArrayDeTarefas();
         titulo.value = "";
         data.value = "";
@@ -130,6 +128,6 @@ function ordenarPrioridade() {
             arrayDeTarefas.splice(i+1, 1);
         }
     }
-    //setLocalStorageArrayEqualsToArrayDeTarefas();
-    //exibirListaTarefas();
+    setLocalStorageArrayEqualsToArrayDeTarefas();
+    exibirListaTarefas();
 }
