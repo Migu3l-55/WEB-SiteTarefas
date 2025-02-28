@@ -37,6 +37,9 @@ botao.addEventListener("click", function(){
         
     } else {
         arrayDeTarefas.push(new tarefa(titulo.value, data.value, prioridade.value));
+        if(prioridade.value != "baixa"){
+            ordenarPrioridade();
+        }
         setLocalStorageArrayEqualsToArrayDeTarefas();
         titulo.value = "";
         data.value = "";
@@ -110,4 +113,23 @@ function limpartTudo() {
     //alert(arrayDeTarefas.length);
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
+}
+
+function ordenarPrioridade() {
+    for (let i = 0; i < arrayDeTarefas.length; i++) {
+        if (arrayDeTarefas[i].tPrioridade == "alta") {
+            arrayDeTarefas.unshift(arrayDeTarefas[i]);
+            arrayDeTarefas.splice(i+1, 1);
+        }
+        else if (arrayDeTarefas[i].tPrioridade == "media") {
+            arrayDeTarefas.splice(1, 0, arrayDeTarefas[i]);
+            arrayDeTarefas.splice(i+1, 1);
+        }
+        else if (arrayDeTarefas[i].tPrioridade == "baixa") {
+            arrayDeTarefas.push(arrayDeTarefas[i]);
+            arrayDeTarefas.splice(i+1, 1);
+        }
+    }
+    //setLocalStorageArrayEqualsToArrayDeTarefas();
+    //exibirListaTarefas();
 }
