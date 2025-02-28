@@ -51,7 +51,6 @@ botao.addEventListener("click", function(){
         data.value = "";
     }
     exibirListaTarefas()
-    console.log(arrayDeTarefas);
 });
 
 
@@ -116,7 +115,6 @@ function concluirTarefa(index) {
 
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
-    console.log(arrayDeTarefas);
 }
 
 function excluirTarefa(index) {
@@ -124,7 +122,6 @@ function excluirTarefa(index) {
 
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
-    //console.log(arrayDeTarefas)
 }
 
 function limpartTudo() {
@@ -143,7 +140,6 @@ function limpartTudo() {
     console.log(arrayDeIdex);
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
-    
 }
 
 function ordenarPrioridade() {
