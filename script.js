@@ -1,6 +1,16 @@
 let arrayDeTarefas = [];
 let botao = document.querySelector("#adicionar-tarefa");
 
+function getDataAtual() {
+    const data = new Date();
+
+    dia = String(data.getDate()).padStart(2, '0');
+    mes = String(data.getMonth() + 1).padStart(2, '0');
+    ano = String(data.getFullYear());
+
+    return (`${ano}-${mes}-${dia}`)
+}
+
 function tarefa(tTitulo, tData, tPrioridade) {
     this.tTitulo = tTitulo;
     this.tData = tData;
@@ -66,7 +76,11 @@ function exibirListaTarefas() {
             text += `
         <tr>
             <td id="tarefa${x}" onclick="concluirTarefa(${x})">${arrayDeTarefas[x].tTitulo}</td>
-            <td>${arrayDeTarefas[x].tData}</td>
+            <td`
+            if (getDataAtual() > arrayDeTarefas[x].tData) {
+                text += ` class="atrasado"`;
+            }
+            text += `>${arrayDeTarefas[x].tData}</td>
             <td>${arrayDeTarefas[x].tPrioridade}</td>
             <td><input id="${x}" type="button" value="concluir" onclick="concluirTarefa(${x})"></td>
             <td><input id="${x}" type="button" value="Excluir" onclick="excluirTarefa(${x})")></td>
@@ -87,13 +101,17 @@ function exibirListaTarefas() {
 
 function concluirTarefa(index) {
     arrayDeTarefas[index].tCompleta = true;
-    arrayDeTarefas[index].tDataConclusao = "xx-xx-xxxx";
+    arrayDeTarefas[index].tDataConclusao = getDataAtual();
 
-    if (arrayDeTarefas[index].tNoPrazo == true) {
-        arrayDeTarefas[index].tDataConclusao += "\n(concluida no prazo)";
-    } else {
-        arrayDeTarefas[index].tDataConclusao += "\n(concluida fora do prazo)";
+    if (arrayDeTarefas[index].tDataConclusao > arrayDeTarefas[index].tData) {
+        arrayDeTarefas[index].tNoPrazo = false;
     }
+    if (arrayDeTarefas[index].tNoPrazo == true) {
+        arrayDeTarefas[index].tDataConclusao += `\n(concluida no prazo [${arrayDeTarefas[index].tData}])`;
+    } else {
+        arrayDeTarefas[index].tDataConclusao += `\n(concluida fora do prazo [${arrayDeTarefas[index].tData}]))`;
+    }
+
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
 }
