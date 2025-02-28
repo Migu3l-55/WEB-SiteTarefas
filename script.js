@@ -64,13 +64,13 @@ function exibirListaTarefas() {
                 <th>tarefa</th>
                 <th>data</th>
                 <th>prioridade</th>
-                <th>Ações</th>
+                <th colspan="2">Ações</th>
             </tr>`;
     text2 = `<tr>
                 <th>tarefa</th>
                 <th>data</th>
                 <th>prioridade</th>
-                <th>Ações</th>
+                <th colspan="2">Ações</th>
             </tr>`;
     for (let x = 0; x < arrayDeTarefas.length; x++) {
         if (arrayDeTarefas[x].tCompleta == false) {
@@ -125,7 +125,19 @@ function excluirTarefa(index) {
 }
 
 function limpartTudo() {
-    arrayDeTarefas.splice(0, arrayDeTarefas.length);
+    let arrayDeIdex = [];
+    setArrayDeTarefasEqualsToLocalStorageArray();
+
+    for (let x = 0; x < arrayDeTarefas.length; x++) {
+        if (arrayDeTarefas[x].tCompleta == true) {
+            arrayDeIdex.push(x);
+        }
+    }
+
+    for (let x = arrayDeIdex.length - 1; x >= 0; x--) {
+        arrayDeTarefas.splice(arrayDeIdex[x], 1)
+    }
+    console.log(arrayDeIdex);
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
 }
