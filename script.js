@@ -47,6 +47,9 @@ botao.addEventListener("click", function(){
         
     } else {
         arrayDeTarefas.push(new tarefa(titulo.value, data.value, prioridade.value));
+        if(prioridade.value != "baixa"){
+            ordenarPrioridade();
+        }
         setLocalStorageArrayEqualsToArrayDeTarefas();
         titulo.value = "";
         data.value = "";
@@ -54,8 +57,10 @@ botao.addEventListener("click", function(){
     exibirListaTarefas()
 });
 
+
 function exibirListaTarefas() {
     setArrayDeTarefasEqualsToLocalStorageArray(); //alert(arrayDeTarefas.length);
+    ordenarPrioridade()
     let elemento = document.querySelector("#tbody-tarefas-incompletas");
     let elemento2 = document.querySelector("#tbody-tarefas-completas");
     let text, text2 = ""
@@ -128,4 +133,31 @@ function limpartTudo() {
     //alert(arrayDeTarefas.length);
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
+}
+
+
+function ordenarPrioridade() {
+    let prioridadeAtual = 0;
+    let prioridadeProx = 0;
+
+    let suporte;
+
+    for (let i = 0; i < arrayDeTarefas.length - 1; i++) {
+        for (let j = 0; j < arrayDeTarefas. length - 1; j ++) {
+            (arrayDeTarefas[j].tPrioridade == "alta") ? prioridadeAtual = 3 : null ;
+            (arrayDeTarefas[j].tPrioridade == "media") ? prioridadeAtual = 2 : null ;
+            (arrayDeTarefas[j].tPrioridade == "baixa") ? prioridadeAtual = 1 : null ;
+            
+            (arrayDeTarefas[j + 1].tPrioridade == "alta") ? prioridadeProx = 3 : null ;
+            (arrayDeTarefas[j + 1].tPrioridade == "media") ? prioridadeProx = 2 : null ;
+            (arrayDeTarefas[j + 1].tPrioridade == "baixa") ? prioridadeProx = 1 : null ;
+
+            if (prioridadeAtual < prioridadeProx) {
+                suporte = arrayDeTarefas[j];
+                arrayDeTarefas[j] = arrayDeTarefas[j + 1];
+                arrayDeTarefas[j + 1] = suporte;
+            }
+        }
+    }
+    setLocalStorageArrayEqualsToArrayDeTarefas();
 }
