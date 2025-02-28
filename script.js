@@ -44,12 +44,8 @@ botao.addEventListener("click", function(){
 
     if (titulo.length == 0 || data.length == 0) {
         alert("Informe os dados");
-        
     } else {
         arrayDeTarefas.push(new tarefa(titulo.value, data.value, prioridade.value));
-        if(prioridade.value != "baixa"){
-            ordenarPrioridade();
-        }
         setLocalStorageArrayEqualsToArrayDeTarefas();
         titulo.value = "";
         data.value = "";
@@ -64,7 +60,7 @@ function exibirListaTarefas() {
     let elemento = document.querySelector("#tbody-tarefas-incompletas");
     let elemento2 = document.querySelector("#tbody-tarefas-completas");
     let text, text2 = ""
-    text= `<tr>
+    text = `<tr>
                 <th>tarefa</th>
                 <th>data</th>
                 <th>prioridade</th>
@@ -123,18 +119,16 @@ function concluirTarefa(index) {
 
 function excluirTarefa(index) {
     arrayDeTarefas.splice(index, 1);
-    //alert(arrayDeTarefas.length);
+
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
 }
 
 function limpartTudo() {
     arrayDeTarefas.splice(0, arrayDeTarefas.length);
-    //alert(arrayDeTarefas.length);
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
 }
-
 
 function ordenarPrioridade() {
     let prioridadeAtual = 0;
