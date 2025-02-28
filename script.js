@@ -110,7 +110,7 @@ function concluirTarefa(index) {
     if (arrayDeTarefas[index].tNoPrazo == true) {
         arrayDeTarefas[index].tDataConclusao += `\n(concluida no prazo [${arrayDeTarefas[index].tData}])`;
     } else {
-        arrayDeTarefas[index].tDataConclusao += `\n(concluida fora do prazo [${arrayDeTarefas[index].tData}]))`;
+        arrayDeTarefas[index].tDataConclusao += `\n(concluida fora do prazo [${arrayDeTarefas[index].tData}])`;
     }
 
     setLocalStorageArrayEqualsToArrayDeTarefas();
