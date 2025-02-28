@@ -125,19 +125,15 @@ function excluirTarefa(index) {
 }
 
 function limpartTudo() {
-    let arrayDeIdex = [];
     setArrayDeTarefasEqualsToLocalStorageArray();
 
-    for (let x = 0; x < arrayDeTarefas.length; x++) {
+    for (let x = (arrayDeTarefas.length - 1); x >= 0; x--) {
         if (arrayDeTarefas[x].tCompleta == true) {
-            arrayDeIdex.push(x);
+            arrayDeTarefas.splice(x, 1);
         }
     }
 
-    for (let x = arrayDeIdex.length - 1; x >= 0; x--) {
-        arrayDeTarefas.splice(arrayDeIdex[x], 1)
-    }
-    console.log(arrayDeIdex);
+    console.log(arrayDeTarefas);
     setLocalStorageArrayEqualsToArrayDeTarefas();
     exibirListaTarefas();
 }
