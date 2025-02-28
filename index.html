@@ -4,26 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Tarefas</title>
+    <style>
+        .concluida {
+            text-decoration: line-through;
+        }
+
+        .atrasado {
+            color: red;
+        }
+    </style>
 </head>
-<body>
+<body onload="exibirListaTarefas()">
     <h1>Gerenciador de Tarefas</h1>
-    <form id="formTarefa">
+    <form id="formTarefa" >
         <label for="tarefa">Tarefa:</label>
-        <input type="text" id="tarefa" name="tarefa" placeholder="Nova tarefa" required>
+        <input type="text" id="tarefa" name="tarefa" placeholder="Nova tarefa">
         <br>
         <label for="dataVencimento">Data de Vencimento:</label>
-        <input type="date" id="dataVencimento" name="dataVencimento" required>
+        <input type="date" id="dataVencimento" name="dataVencimento">
         <br>
         <label for="prioridade">Prioridade:</label>
-        <select id="prioridade" name="prioridade">
+        <select id="prioridade" name="prioridade" required>
             <option value="baixa" selected>Baixa</option>
             <option value="media">Média</option>
             <option value="alta">Alta</option>
         </select>
         <br>
-        <button type="submit">Adicionar</button>
-
-        
+        <input type="button" value="Adicionar Tarefa" id="adicionar-tarefa">
     </form>
+
+    <section id="listagem">
+        <table id="tabelaTarefas-Incompletas">
+            <caption>Tarefas a fazer</caption>
+            <tbody id="tbody-tarefas-incompletas">
+                
+            </tbody>
+        </table>
+
+        <table id="tabelaTarefas-Completas">
+            <caption>Tarefas concluidas</caption>
+            <tbody id="tbody-tarefas-completas">
+                
+            </tbody>
+        </table>
+    </section>
+    <input type="button" value="LIMPAR TODAS AS TAREFAS" onclick="limpartTudo()">
+    <script src="script.js"></script>
 </body>
 </html>
